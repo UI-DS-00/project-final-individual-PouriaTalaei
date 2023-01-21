@@ -10,10 +10,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class ScanJSONFile {
+    ArrayList<User> users = new ArrayList<>();
+
     @SuppressWarnings("unchecked")
     public void readJSONFile() throws FileNotFoundException {
         JSONParser jsonParser = new JSONParser();
-        ArrayList<User> users = new ArrayList<>();
         try (FileReader reader = new FileReader("users.json")) {
             Object obj = jsonParser.parse(reader);
             JSONArray employeeList = (JSONArray) obj;
@@ -35,6 +36,15 @@ public class ScanJSONFile {
             throw new RuntimeException(e);
         } catch (ParseException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void addUsersToGraph() {
+        Graph graph = new Graph(users.size());
+        for (int i = 0; i < users.size(); i++) {
+            for (int j = 0; j < users.get(i).getConnectionId().size(); j++) {
+                graph.addEdge(Integer.parseInt(users.get(i).getId())-1, Integer.parseInt(users.get(i).getConnectionId().get(j))-1);
+            }
         }
     }
 }
