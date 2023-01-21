@@ -18,71 +18,38 @@ public class Graph {
     void BFS(int s) {
 
         boolean visited[] = new boolean[Integer.parseInt(vertex)];
-
-        // Create a queue for BFS
         LinkedList<Integer> queue = new LinkedList<Integer>();
-
-        // Mark the current node as visited and enqueue it
+        Map<Integer, Integer> levelsOfUsers = new HashMap<>();//vertex & level
         visited[s] = true;
 
         queue.add(s);
-
-        while (queue.size() != 0) {
-
-            // Dequeue a vertex from queue and print it
-
+        levelsOfUsers.put(s, 0);
+        ArrayList<Integer> bfsTraversal = new ArrayList<>();
+        while ((queue.size() != 0) && (levelsOfUsers.get(s) < 6)) {
             s = queue.poll();
-
-            System.out.print(s + " ");
-
-            // Get all adjacent vertices of the dequeued
-
-            // vertex s If a adjacent has not been visited,
-
-            // then mark it visited and enqueue it
-
-            ListIterator<String> i = adjacencyLists[s].listIterator();
-
-            while (i.hasNext()) {
-                int n = Integer.parseInt(i.next());
-
+            bfsTraversal.add(s);
+            ListIterator<String> iterator = adjacencyLists[s].listIterator();
+            while (iterator.hasNext()) {
+                int n = Integer.parseInt(iterator.next());
                 if (!visited[n]) {
                     visited[n] = true;
                     queue.add(n);
+                    levelsOfUsers.put(n, levelsOfUsers.get(s) + 1);
                 }
             }
         }
     }
 
-    // Driver method to
-    public static void main(String args[]) {
-
-        Graph g = new Graph(4);
-
-
-        g.addEdge(0, 1);
-
-        g.addEdge(0, 2);
-
-        g.addEdge(1, 2);
-
-        g.addEdge(2, 0);
-
-        g.addEdge(2, 3);
-
-        g.addEdge(3, 3);
+//    public void scoringUsers() {
+//        Map<Integer,Integer> scoreOfUser = new HashMap<>();
+//
+//
+//
+//    }
 
 
-        System.out.println(
-
-                "Following is Breadth First Traversal "
-
-                        + "(starting from vertex 2)");
-
-
-        g.BFS(2);
-
-    }
-
+//        for (int i = 0; i < bfsTraversal.size() - 1; i++) {
+//            System.out.println(bfsTraversal.get(i));
+//        }
 }
 

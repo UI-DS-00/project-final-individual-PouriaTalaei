@@ -10,10 +10,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class ScanJSONFile {
-    ArrayList<User> users = new ArrayList<>();
+    // ArrayList<User> users = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
-    public void readJSONFile() throws FileNotFoundException {
+    public void readJSONFile(ArrayList<User> users) throws FileNotFoundException {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader("users.json")) {
             Object obj = jsonParser.parse(reader);
@@ -39,12 +39,16 @@ public class ScanJSONFile {
         }
     }
 
-    public void addUsersToGraph() {
-        Graph graph = new Graph(users.size());
+    public void addUsersToGraph(ArrayList<User> users, Graph graph) {
         for (int i = 0; i < users.size(); i++) {
             for (int j = 0; j < users.get(i).getConnectionId().size(); j++) {
-                graph.addEdge(Integer.parseInt(users.get(i).getId())-1, Integer.parseInt(users.get(i).getConnectionId().get(j))-1);
+                graph.addEdge(Integer.parseInt(users.get(i).getId()) - 1, Integer.parseInt(users.get(i).getConnectionId().get(j)) - 1);
             }
         }
     }
+
+    public void bfs5Level(int id,Graph graph) {
+        graph.BFS(id);
+    }
+
 }
