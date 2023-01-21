@@ -1,8 +1,10 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main {
-//    public static void main(String[] args) throws IOException {
-//        ScanJSONFile scanJSONFile = new ScanJSONFile();
-//
-//    }
+    public static void main(String[] args) throws FileNotFoundException {
+        ScanJSONFile scanJSONFile = new ScanJSONFile();
+        scanJSONFile.readJSONFile();
+        scanJSONFile.addUsersToGraph();
+    }
 }
