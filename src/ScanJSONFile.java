@@ -10,7 +10,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class ScanJSONFile {
-    // ArrayList<User> users = new ArrayList<>();
+    //ArrayList<User> users = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
     public void readJSONFile(ArrayList<User> users) throws FileNotFoundException {
@@ -30,6 +30,7 @@ public class ScanJSONFile {
                 user.setWorkplace((String) jsonObject.get("workplace"));
                 user.setSpecialties((ArrayList<String>) jsonObject.get("specialties"));
                 user.setConnectionId((ArrayList<String>) jsonObject.get("connectionId"));
+                users.add(Integer.parseInt(user.getId())-1,user);
                 users.add(user);
             }
         } catch (IOException e) {
@@ -47,8 +48,8 @@ public class ScanJSONFile {
         }
     }
 
-    public void bfs5Level(int id,Graph graph) {
-        graph.BFS(id);
+    public void bfs5Level(int id,Graph graph,ArrayList<User> users) {
+        graph.BFS(id,users);
     }
 
 }

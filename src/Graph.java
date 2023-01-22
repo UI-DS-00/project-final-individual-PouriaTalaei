@@ -15,16 +15,17 @@ public class Graph {
         adjacencyLists[v].add(String.valueOf(w));
     }
 
-    void BFS(int s) {
+    void BFS(int userId, ArrayList<User> users) {
 
         boolean visited[] = new boolean[Integer.parseInt(vertex)];
         LinkedList<Integer> queue = new LinkedList<Integer>();
         Map<Integer, Integer> levelsOfUsers = new HashMap<>();//vertex & level
-        visited[s] = true;
+        visited[userId] = true;
 
-        queue.add(s);
-        levelsOfUsers.put(s, 0);
+        queue.add(userId);
+        levelsOfUsers.put(userId, 0);
         ArrayList<Integer> bfsTraversal = new ArrayList<>();
+        int s = userId;
         while ((queue.size() != 0) && (levelsOfUsers.get(s) < 6)) {
             s = queue.poll();
             bfsTraversal.add(s);
@@ -38,11 +39,46 @@ public class Graph {
                 }
             }
         }
+
+
+        Map<Integer, Integer> scoreOfUser = new HashMap<>();
+        for (int i = 0; i < levelsOfUsers.size(); i++) {
+            switch (levelsOfUsers.get(i)) {
+                case 1:
+                    scoreOfUser.put(i, 50);
+                    break;
+                case 2:
+                    scoreOfUser.put(i, 40);
+                    break;
+                case 3:
+                    scoreOfUser.put(i, 30);
+                    break;
+                case 4:
+                    scoreOfUser.put(i, 20);
+                    break;
+                case 5:
+                    scoreOfUser.put(i, 10);
+                    break;
+            }
+        }
+        for (int i = 0; i < bfsTraversal.size(); i++) {
+            if(Objects.equals(users.get(i).getUniversityLocation(), users.get(userId).getUniversityLocation()))
+                scoreOfUser.replace(i,scoreOfUser.get(i),scoreOfUser.get(i)+10);
+            if (Objects.equals(users.get(i).getWorkplace(), users.get(userId).getWorkplace()))
+                scoreOfUser.replace(i,scoreOfUser.get(i),scoreOfUser.get(i)+10);
+
+            for (int j = 0; j < users.get(i).getSpecialties().size(); j++) {
+                for (int k = 0; k <users.get(userId).getSpecialties().size(); k++) {
+                    if (Objects.equals(users.get(i).getSpecialties().get(j), users.get(userId).getSpecialties().get(k)))
+                        scoreOfUser.replace(i,scoreOfUser.get(i),scoreOfUser.get(i)+20);
+                }
+            }
+        }
     }
 
+
 //    public void scoringUsers() {
-//        Map<Integer,Integer> scoreOfUser = new HashMap<>();
-//
+//        Map<Integer, Integer> scoreOfUser = new HashMap<>();
 //
 //
 //    }
