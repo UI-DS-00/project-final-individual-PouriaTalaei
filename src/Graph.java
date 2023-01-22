@@ -1,5 +1,3 @@
-
-import java.awt.desktop.UserSessionEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -101,14 +99,13 @@ public class Graph {
                 break;
         }
         System.out.println(scores);
-        // System.out.println(scores.get(0).getKey());
         for (int i = 0; i < scores.size(); i++) {
             printUser(Integer.parseInt(scores.get(i).getKey()), users);
         }
     }
 
-
     public static void printUser(int userId, ArrayList<User> users) {
+        System.out.println("ID : " + users.get(userId).getId());
         System.out.println("Name : " + users.get(userId).getName());
         System.out.println("DateOfBirth : " + users.get(userId).getDateOfBirth());
         System.out.println("UniversityLocation : " + users.get(userId).getUniversityLocation());
@@ -128,21 +125,14 @@ public class Graph {
         System.out.println();
     }
 
-
     public void showListOfUsers(ArrayList<User> users) {
         for (int i = 0; i < users.size(); i++)
             System.out.println(users.get(i).getName());
     }
 
-
-    public void searchByName(ArrayList<User> users,String name){
-        for (int i=0;i<users.size();i++){
-            if(Objects.equals(users.get(i).getName(), name)){
-                printUser(i,users);
-            }
-        }
-
-
-
+    public void searchByName(ArrayList<User> users, String name) {
+        for (int i = 0; i < users.size(); i++)
+            if (Objects.equals(users.get(i).getName(), name))
+                printUser(i, users);
     }
 }

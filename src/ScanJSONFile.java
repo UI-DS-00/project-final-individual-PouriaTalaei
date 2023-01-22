@@ -59,5 +59,4 @@ public class ScanJSONFile {
         graph.BFS(id, users);
         graph.sortMap(users);
     }
-
 }
