@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -52,10 +51,8 @@ public class Graph {
             }
         }
 
-
-
         for (int i = 0; i < users.size(); i++) {
-            if (levelsOfUsers.get(i)==null)
+            if (levelsOfUsers.get(i) == null)
                 continue;
             switch (levelsOfUsers.get(i)) {
                 case 1 -> scoreOfUser.put(i, 50);
@@ -66,7 +63,7 @@ public class Graph {
             }
         }
         for (int i = 0; i < users.size(); i++) {
-            if (scoreOfUser.get(i)==null)
+            if (scoreOfUser.get(i) == null)
                 continue;
             if (Objects.equals(users.get(i).getUniversityLocation(), users.get(userId).getUniversityLocation()))
                 scoreOfUser.replace(i, scoreOfUser.get(i), scoreOfUser.get(i) + 10);
@@ -82,31 +79,51 @@ public class Graph {
         }
     }
 
-    public void sortMap() {
+    public void sortMap(ArrayList<User> users) {
         ArrayList<Integer> list = new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : scoreOfUser.entrySet()) {
             list.add(entry.getValue());
         }
         Collections.sort(list);
         Collections.reverse(list);
-        for (int num : list) {
-//          if (num >= 20)
-//                break;
-            for (Entry<Integer, Integer> entry : scoreOfUser.entrySet()) {
-                if (entry.getValue().equals(num)) {
+        for (int num : list)
+            for (Entry<Integer, Integer> entry : scoreOfUser.entrySet())
+                if (entry.getValue().equals(num))
                     sortedMap.put(String.valueOf(entry.getKey()), num);
-                }
-            }
-        }
 
-        int i = 0;
+        int counter = 0;
         ArrayList<Map.Entry<String, Integer>> scores = new ArrayList<>();
-        for(String key : sortedMap.keySet()) {
+        for (String key : sortedMap.keySet()) {
             scores.add(Map.entry(key, sortedMap.get(key)));
-            i++;
-            if(i == 20) break;
+            counter++;
+            if (counter == 20)
+                break;
         }
-
         System.out.println(scores);
+        // System.out.println(scores.get(0).getKey());
+        for (int i = 0; i < scores.size(); i++) {
+            printUser(Integer.parseInt(scores.get(i).getKey()), users);
+        }
+    }
+
+
+    public static void printUser(int userId, ArrayList<User> users) {
+        System.out.println("Name : " + users.get(userId).getName());
+        System.out.println("DateOfBirth : " + users.get(userId).getDateOfBirth());
+        System.out.println("UniversityLocation : " + users.get(userId).getUniversityLocation());
+        System.out.println("Field : " + users.get(userId).getField());
+        System.out.println("Email : " + users.get(userId).getEmail());
+        System.out.println("Workplace : " + users.get(userId).getWorkplace());
+        System.out.println("Specialties : " );
+        for (int i = 0; i < users.get(userId).getSpecialties().size(); i++) {
+            System.out.println(users.get(userId).getSpecialties().get(i));
+        }
+        System.out.println("ConnectionId : " );
+        for (int i = 0; i < users.get(userId).getConnectionId().size(); i++) {
+            System.out.println(users.get(userId).getConnectionId().get(i));
+        }
+        System.out.println();
+        System.out.println("----------------------------------------");
+        System.out.println();
     }
 }

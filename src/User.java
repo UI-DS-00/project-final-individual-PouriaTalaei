@@ -6,6 +6,7 @@ public class User {
     private String dateOfBirth;
     private String universityLocation;
     private String field;
+    private String email;
     private String workplace;
     private ArrayList<String> specialties;
     private ArrayList<String> connectionId;
@@ -41,6 +42,15 @@ public class User {
     public void setUniversityLocation(String universityLocation) {
         this.universityLocation = universityLocation;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public String getField() {
         return field;

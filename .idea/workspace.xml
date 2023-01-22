@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3162328-d93c-4293-860d-fa3d3191889d" name="Changes" comment="Score users">
+    <list default="true" id="e3162328-d93c-4293-860d-fa3d3191889d" name="Changes" comment="suggest 20 user to connect">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ScanJSONFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScanJSONFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +84,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674198149392</updated>
-      <workItem from="1674198150797" duration="43730000" />
+      <workItem from="1674198150797" duration="48155000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1674198284770</created>
@@ -142,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674365607379</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="suggest 20 user to connect">
+      <created>1674378051416</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1674378051416</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +174,8 @@
     <MESSAGE value="add users to graph" />
     <MESSAGE value="BFS traversal 5 levels" />
     <MESSAGE value="Score users" />
-    <option name="LAST_COMMIT_MESSAGE" value="Score users" />
+    <MESSAGE value="suggest 20 user to connect" />
+    <option name="LAST_COMMIT_MESSAGE" value="suggest 20 user to connect" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -179,7 +187,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Graph.java</url>
-          <line>91</line>
+          <line>88</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">

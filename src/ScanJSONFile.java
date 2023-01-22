@@ -14,7 +14,7 @@ public class ScanJSONFile {
     @SuppressWarnings("unchecked")
     public void readJSONFile(ArrayList<User> users, ArrayList<User> sortedUser) throws FileNotFoundException {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("users.json")) {
+        try (FileReader reader = new FileReader("users1.json")) {
             Object obj = jsonParser.parse(reader);
             JSONArray employeeList = (JSONArray) obj;
             Iterator<JSONObject> jsonObjectIterator = employeeList.iterator();
@@ -25,6 +25,7 @@ public class ScanJSONFile {
                 user.setId((String) jsonObject.get("id"));
                 user.setDateOfBirth((String) jsonObject.get("dateOfBirth"));
                 user.setUniversityLocation((String) jsonObject.get("universityLocation"));
+                user.setEmail((String) jsonObject.get("email"));
                 user.setField((String) jsonObject.get("field"));
                 user.setWorkplace((String) jsonObject.get("workplace"));
                 user.setSpecialties((ArrayList<String>) jsonObject.get("specialties"));
@@ -58,7 +59,7 @@ public class ScanJSONFile {
 
     public void bfs5Level(int id, Graph graph, ArrayList<User> users) {
         graph.BFS(id, users);
-        graph.sortMap();
+        graph.sortMap(users);
     }
 
 }
