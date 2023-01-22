@@ -10,10 +10,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class ScanJSONFile {
-    //ArrayList<User> users = new ArrayList<>();
-
+    // ArrayList<User> users = new ArrayList<>(999);
     @SuppressWarnings("unchecked")
-    public void readJSONFile(ArrayList<User> users) throws FileNotFoundException {
+    public void readJSONFile(ArrayList<User> users, ArrayList<User> sortedUser) throws FileNotFoundException {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader("users.json")) {
             Object obj = jsonParser.parse(reader);
@@ -30,13 +29,22 @@ public class ScanJSONFile {
                 user.setWorkplace((String) jsonObject.get("workplace"));
                 user.setSpecialties((ArrayList<String>) jsonObject.get("specialties"));
                 user.setConnectionId((ArrayList<String>) jsonObject.get("connectionId"));
-                users.add(Integer.parseInt(user.getId())-1,user);
+                // users.add(Integer.parseInt(user.getId())-1,user);
                 users.add(user);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ParseException e) {
             throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < users.size(); i++) {
+            for (int j = 0; j < users.size(); j++) {
+                if ((Integer.parseInt(users.get(j).getId()) - 1) == i) {
+                    sortedUser.add(users.get(j));
+                    break;
+                }
+            }
         }
     }
 
@@ -48,8 +56,9 @@ public class ScanJSONFile {
         }
     }
 
-    public void bfs5Level(int id,Graph graph,ArrayList<User> users) {
-        graph.BFS(id,users);
+    public void bfs5Level(int id, Graph graph, ArrayList<User> users) {
+        graph.BFS(id, users);
+        graph.sortMap();
     }
 
 }

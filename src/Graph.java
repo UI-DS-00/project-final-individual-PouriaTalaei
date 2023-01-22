@@ -1,8 +1,20 @@
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import java.util.*;
 
 public class Graph {
     private String vertex;
     private LinkedList<String> adjacencyLists[];
+
+    Map<Integer, Integer> scoreOfUser = new HashMap<>();
+    LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
 
     Graph(int vertex) {
         this.vertex = String.valueOf(vertex);
@@ -26,7 +38,7 @@ public class Graph {
         levelsOfUsers.put(userId, 0);
         ArrayList<Integer> bfsTraversal = new ArrayList<>();
         int s = userId;
-        while ((queue.size() != 0) && (levelsOfUsers.get(s) < 6)) {
+        while ((queue.size() != 0) && (levelsOfUsers.get(s) < 5)) {
             s = queue.poll();
             bfsTraversal.add(s);
             ListIterator<String> iterator = adjacencyLists[s].listIterator();
@@ -41,51 +53,60 @@ public class Graph {
         }
 
 
-        Map<Integer, Integer> scoreOfUser = new HashMap<>();
-        for (int i = 0; i < levelsOfUsers.size(); i++) {
+
+        for (int i = 0; i < users.size(); i++) {
+            if (levelsOfUsers.get(i)==null)
+                continue;
             switch (levelsOfUsers.get(i)) {
-                case 1:
-                    scoreOfUser.put(i, 50);
-                    break;
-                case 2:
-                    scoreOfUser.put(i, 40);
-                    break;
-                case 3:
-                    scoreOfUser.put(i, 30);
-                    break;
-                case 4:
-                    scoreOfUser.put(i, 20);
-                    break;
-                case 5:
-                    scoreOfUser.put(i, 10);
-                    break;
+                case 1 -> scoreOfUser.put(i, 50);
+                case 2 -> scoreOfUser.put(i, 40);
+                case 3 -> scoreOfUser.put(i, 30);
+                case 4 -> scoreOfUser.put(i, 20);
+                case 5 -> scoreOfUser.put(i, 10);
             }
         }
-        for (int i = 0; i < bfsTraversal.size(); i++) {
-            if(Objects.equals(users.get(i).getUniversityLocation(), users.get(userId).getUniversityLocation()))
-                scoreOfUser.replace(i,scoreOfUser.get(i),scoreOfUser.get(i)+10);
+        for (int i = 0; i < users.size(); i++) {
+            if (scoreOfUser.get(i)==null)
+                continue;
+            if (Objects.equals(users.get(i).getUniversityLocation(), users.get(userId).getUniversityLocation()))
+                scoreOfUser.replace(i, scoreOfUser.get(i), scoreOfUser.get(i) + 10);
             if (Objects.equals(users.get(i).getWorkplace(), users.get(userId).getWorkplace()))
-                scoreOfUser.replace(i,scoreOfUser.get(i),scoreOfUser.get(i)+10);
+                scoreOfUser.replace(i, scoreOfUser.get(i), scoreOfUser.get(i) + 10);
 
             for (int j = 0; j < users.get(i).getSpecialties().size(); j++) {
-                for (int k = 0; k <users.get(userId).getSpecialties().size(); k++) {
+                for (int k = 0; k < users.get(userId).getSpecialties().size(); k++) {
                     if (Objects.equals(users.get(i).getSpecialties().get(j), users.get(userId).getSpecialties().get(k)))
-                        scoreOfUser.replace(i,scoreOfUser.get(i),scoreOfUser.get(i)+20);
+                        scoreOfUser.replace(i, scoreOfUser.get(i), scoreOfUser.get(i) + 20);
                 }
             }
         }
     }
 
+    public void sortMap() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : scoreOfUser.entrySet()) {
+            list.add(entry.getValue());
+        }
+        Collections.sort(list);
+        Collections.reverse(list);
+        for (int num : list) {
+//          if (num >= 20)
+//                break;
+            for (Entry<Integer, Integer> entry : scoreOfUser.entrySet()) {
+                if (entry.getValue().equals(num)) {
+                    sortedMap.put(String.valueOf(entry.getKey()), num);
+                }
+            }
+        }
 
-//    public void scoringUsers() {
-//        Map<Integer, Integer> scoreOfUser = new HashMap<>();
-//
-//
-//    }
+        int i = 0;
+        ArrayList<Map.Entry<String, Integer>> scores = new ArrayList<>();
+        for(String key : sortedMap.keySet()) {
+            scores.add(Map.entry(key, sortedMap.get(key)));
+            i++;
+            if(i == 20) break;
+        }
 
-
-//        for (int i = 0; i < bfsTraversal.size() - 1; i++) {
-//            System.out.println(bfsTraversal.get(i));
-//        }
+        System.out.println(scores);
+    }
 }
-
