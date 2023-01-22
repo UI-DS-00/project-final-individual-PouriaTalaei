@@ -14,15 +14,10 @@ public class Main {
         scanJSONFile.addUsersToGraph(sortedUser, graph);
 
         int id = input.nextInt();
-//        int idInUsers = -1;
-//        for (int i = 0; i < users.size(); i++) {
-//            if (sortedUserusers.get(i).getId().equals(String.valueOf(id))) {
-//                idInUsers = i;
-//                break;
-//            }
-//        }
         scanJSONFile.bfs5Level((Integer.parseInt(sortedUser.get(id).getId())-1), graph, sortedUser);
-
-
+        graph.showListOfUsers(users);
+        input.nextLine();
+        String name = input.nextLine();
+        graph.searchByName(users,name);
     }
 }

@@ -10,7 +10,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class ScanJSONFile {
-    // ArrayList<User> users = new ArrayList<>(999);
     @SuppressWarnings("unchecked")
     public void readJSONFile(ArrayList<User> users, ArrayList<User> sortedUser) throws FileNotFoundException {
         JSONParser jsonParser = new JSONParser();
@@ -30,7 +29,6 @@ public class ScanJSONFile {
                 user.setWorkplace((String) jsonObject.get("workplace"));
                 user.setSpecialties((ArrayList<String>) jsonObject.get("specialties"));
                 user.setConnectionId((ArrayList<String>) jsonObject.get("connectionId"));
-                // users.add(Integer.parseInt(user.getId())-1,user);
                 users.add(user);
             }
         } catch (IOException e) {

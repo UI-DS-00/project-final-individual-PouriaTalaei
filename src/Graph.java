@@ -1,4 +1,5 @@
 
+import java.awt.desktop.UserSessionEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -114,16 +115,34 @@ public class Graph {
         System.out.println("Field : " + users.get(userId).getField());
         System.out.println("Email : " + users.get(userId).getEmail());
         System.out.println("Workplace : " + users.get(userId).getWorkplace());
-        System.out.println("Specialties : " );
+        System.out.println("Specialties : ");
         for (int i = 0; i < users.get(userId).getSpecialties().size(); i++) {
             System.out.println(users.get(userId).getSpecialties().get(i));
         }
-        System.out.println("ConnectionId : " );
+        System.out.println("ConnectionId : ");
         for (int i = 0; i < users.get(userId).getConnectionId().size(); i++) {
             System.out.println(users.get(userId).getConnectionId().get(i));
         }
         System.out.println();
         System.out.println("----------------------------------------");
         System.out.println();
+    }
+
+
+    public void showListOfUsers(ArrayList<User> users) {
+        for (int i = 0; i < users.size(); i++)
+            System.out.println(users.get(i).getName());
+    }
+
+
+    public void searchByName(ArrayList<User> users,String name){
+        for (int i=0;i<users.size();i++){
+            if(Objects.equals(users.get(i).getName(), name)){
+                printUser(i,users);
+            }
+        }
+
+
+
     }
 }
